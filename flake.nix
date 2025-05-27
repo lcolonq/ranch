@@ -8,7 +8,7 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      oub = inputs.teleia.native.build ./. "ranch";
+      ranch = inputs.teleia.native.build ./. "ranch";
     in {
       packages.${system} = {
         default = ranch;
@@ -17,6 +17,10 @@
       applications.${system}.default = {
         type = "app";
         program = "${ranch}/bin/ranch";
+      };
+      devShells.${system} = {
+        default = inputs.teleia.shell;
+        windows = inputs.teleia.windows.shell;
       };
     };
 }
