@@ -1,5 +1,5 @@
 #![allow(dead_code, unused_variables)]
-use std::collections::HashMap;
+use std::{collections::HashMap, f32::consts::PI};
 use teleia::*;
 
 struct Assets {
@@ -63,31 +63,36 @@ impl teleia::state::Game for Game {
         Ok(())
     }
     fn render(&mut self, ctx: &context::Context, st: &mut state::State) -> Erm<()> {
+        ctx.clear_color(glam::Vec4::new(0.1, 0.1, 0.1, 1.0));
         ctx.clear();
         st.bind_3d(ctx, &self.assets.shader_scene);
         self.assets.shader_scene.set_position_3d(
             ctx,
             &glam::Mat4::from_scale_rotation_translation(
-                glam::Vec3::new(0.005, 0.005, 0.005),
-                // glam::Vec3::new(1.0, 1.0, 1.0),
-                glam::Quat::from_rotation_y(st.tick as f32 / 60.0),
-                glam::Vec3::new(0.0, -0.2, 0.0),
+                glam::Vec3::new(0.004, 0.004, 0.004),
+                glam::Quat::from_euler(
+                    glam::EulerRot::XYZ,
+                    PI / 2.0,
+                    0.0,
+                    st.tick as f32 / 60.0,
+                ),
+                glam::Vec3::new(0.0, -0.3, 0.0),
             ),
         );
         self.assets.mii.render(ctx, &self.assets.shader_scene);
         self.assets.font.render_text(
             ctx,
             &glam::Vec2::new(0.0, 0.0),
-            "hello computer",
+            "hello gamerZ",
         );
-        st.bind_2d(ctx, &self.assets.shader_flat);
-        self.assets.texture_test.bind(ctx);
-        self.assets.shader_flat.set_position_2d(
-            ctx,
-            &glam::Vec2::new(40.0, 40.0),
-            &glam::Vec2::new(16.0, 16.0),
-        );
-        self.assets.mesh_square.render(ctx);
+        // st.bind_2d(ctx, &self.assets.shader_flat);
+        // self.assets.texture_test.bind(ctx);
+        // self.assets.shader_flat.set_position_2d(
+        //     ctx,
+        //     &glam::Vec2::new(40.0, 40.0),
+        //     &glam::Vec2::new(16.0, 16.0),
+        // );
+        // self.assets.mesh_square.render(ctx);
         Ok(())
     }
 }

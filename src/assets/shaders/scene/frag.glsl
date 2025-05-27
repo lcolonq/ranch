@@ -6,7 +6,5 @@ void main()
     if (texel.a != 1.0) {
         discard;
     }
-
-    // frag_color = vec4(texel.rgb, texel.a);
     frag_color = vec4(0.0, 1.0, 0.0, 1.0);
 } 

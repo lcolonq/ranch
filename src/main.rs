@@ -2,7 +2,7 @@ mod game;
 
 #[cfg(not(target_arch = "wasm32"))]
 pub fn main() -> teleia::Erm<()> {
-    teleia::run("game", 240, 160, teleia::Options::empty(), game::Game::new)?;
+    teleia::run("My Ooze Ranch", 240, 160, teleia::Options::empty(), game::Game::new)?;
     Ok(())
 }
 
