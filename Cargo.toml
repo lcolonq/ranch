@@ -22,8 +22,8 @@ debug = false
 opt-level = 2
 
 [dependencies]
-teleia = { path = "../teleia/crates/teleia" } # engine
-# teleia = { git = "https://github.com/lcolonq/teleia" } # engine
+# teleia = { path = "../teleia/crates/teleia" } # engine
+teleia = { git = "https://github.com/lcolonq/teleia" } # engine
 glam = "*" # linear algebra
 bitflags = "*" # C-style bitwise flags
 rand = "*" # rng

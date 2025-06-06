@@ -8,11 +8,12 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      ranch = inputs.teleia.native.build ./. "ranch";
+      ranch = inputs.teleia.native.build ./. "ranch_lib";
+      wasm = inputs.teleia.wasm.build ./. "ranch_lib";
     in {
       packages.${system} = {
         default = ranch;
-        inherit ranch;
+        inherit ranch wasm;
       };
       applications.${system}.default = {
         type = "app";
@@ -20,7 +21,11 @@
       };
       devShells.${system} = {
         default = inputs.teleia.shell;
-        windows = inputs.teleia.windows.shell;
+      };
+      overlay = self: super: {
+        oubliette = {
+          inherit wasm;
+        };
       };
     };
 }
