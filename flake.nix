@@ -23,7 +23,7 @@
         default = inputs.teleia.shell;
       };
       overlay = self: super: {
-        oubliette = {
+        ranch = {
           inherit wasm;
         };
       };
