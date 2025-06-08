@@ -10,10 +10,11 @@
       pkgs = import nixpkgs { inherit system; };
       ranch = inputs.teleia.native.build ./. "ranch_lib";
       wasm = inputs.teleia.wasm.build ./. "ranch_lib";
+      wasmDeploy = inputs.teleia.wasm.buildAtUrl ./. "ranch_lib" "ranch";
     in {
       packages.${system} = {
         default = ranch;
-        inherit ranch wasm;
+        inherit ranch wasm wasmDeploy;
       };
       applications.${system}.default = {
         type = "app";
